@@ -16,14 +16,36 @@ class ContactController {
 
     if (!contact) {
       // User not found
-      return response.status(404).json({ error: 'User not found' });
+      return response.status(404).send({ error: 'User not found' });
     }
 
     return response.json(contact);
   }
 
-  store() {
+  async store(request, response) {
     // Cria um novo registro
+    const {
+      name, email, phone, category_id,
+    } = request.body;
+
+    const emailAlreadyInUse = await ContactsRepository.findByEmail(email);
+
+    if (!name) {
+      response.status(422).json({ error: 'Nome é obrigatórios.' });
+    }
+
+    if (emailAlreadyInUse) {
+      response.status(422).json({ error: 'O email já existe' });
+    }
+
+    const contact = await ContactsRepository.create({
+      name,
+      email,
+      phone,
+      category_id,
+    });
+
+    return response.json(contact);
   }
 
   update() {
