@@ -53,7 +53,7 @@ class ContactsRepository {
     category_id,
   }) {
     const row = await database.query(`
-      UPDATE contatcs
+      UPDATE contacts
       SET name = $1, email = $2, phone = $3, category_id = $4
       WHERE id = $5
       RETURNING *
