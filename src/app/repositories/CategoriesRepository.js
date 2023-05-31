@@ -24,6 +24,17 @@ class CategoriesRepository {
     return row;
   }
 
+  async update(id, name) {
+    const [category] = await database.query(`
+    UPDATE categories
+    SET name = $1
+    WHERE id = $2
+    RETURNING *
+    `, [name, id]);
+
+    return category;
+  }
+
   async delete(id) {
     const op = await database.query(`
     DELETE FROM categories

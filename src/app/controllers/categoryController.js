@@ -35,7 +35,18 @@ class CategoryController {
 
   async update(request, response) {
     // Atualiza um registro
-    response.send('Método PUT funcionando');
+    const { id } = request.params;
+    const { name } = request.body;
+
+    const category = await CategoriesRepository.findById(id);
+
+    if (!category) {
+      return response.json({ error: 'Categoria não encontrada' });
+    }
+
+    const categoryForUpdate = await CategoriesRepository.update(id, name);
+
+    return response.json(categoryForUpdate);
   }
 
   async delete(request, response) {
