@@ -31,11 +31,11 @@ class ContactController {
     const emailAlreadyInUse = await ContactsRepository.findByEmail(email);
 
     if (!name) {
-      response.status(422).json({ error: 'Nome é obrigatórios.' });
+      return response.status(422).json({ error: 'Nome é obrigatórios.' });
     }
 
     if (emailAlreadyInUse) {
-      response.status(422).json({ error: 'O email já existe' });
+      return response.status(422).json({ error: 'O email já existe' });
     }
 
     const contact = await ContactsRepository.create({
