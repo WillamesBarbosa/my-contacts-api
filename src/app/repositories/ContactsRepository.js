@@ -52,7 +52,7 @@ class ContactsRepository {
     phone,
     category_id,
   }) {
-    const row = await database.query(`
+    const [row] = await database.query(`
       UPDATE contacts
       SET name = $1, email = $2, phone = $3, category_id = $4
       WHERE id = $5

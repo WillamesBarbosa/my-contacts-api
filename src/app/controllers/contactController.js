@@ -71,7 +71,7 @@ class ContactController {
       response.status(422).json({ error: 'Nome é obrigatórios.' });
     }
 
-    if (emailAlreadyInUse && contactForUpdate.id !== Number(id)) {
+    if (emailAlreadyInUse && contactForUpdate.id !== id) {
       response.status(422).json({ error: 'O email já existe' });
     }
 
