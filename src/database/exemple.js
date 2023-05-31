@@ -4,7 +4,7 @@ const client = new Client({
   host: 'host',
   port: 'port',
   user: 'user',
-  password: 'user',
+  password: 'password',
   database: 'database name',
 });
 client.connect();
