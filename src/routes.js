@@ -14,6 +14,7 @@ router.put('/contacts/:id', ContactController.update);
 // Routes for categories
 
 router.get('/categories', CategoryController.index);
+router.get('/categories/:id', CategoryController.show);
 router.post('/categories', CategoryController.store);
 
 module.exports = router;

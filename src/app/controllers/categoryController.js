@@ -10,7 +10,14 @@ class CategoryController {
 
   async show(request, response) {
     // Mostrar UM registro
-    response.send('Método GET unico funcionando');
+    const { id } = request.params;
+
+    const category = await CategoriesRepository.findById(id);
+    if (!category) {
+      return response.json({ error: 'Categoria não encontrada' });
+    }
+
+    return response.json(category);
   }
 
   async store(request, response) {
