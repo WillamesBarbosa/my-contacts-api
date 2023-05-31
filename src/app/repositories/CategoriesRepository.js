@@ -23,6 +23,15 @@ class CategoriesRepository {
 
     return row;
   }
+
+  async delete(id) {
+    const op = await database.query(`
+    DELETE FROM categories
+    WHERE id = $1
+    `, [id]);
+
+    return op;
+  }
 }
 
 module.exports = new CategoriesRepository();

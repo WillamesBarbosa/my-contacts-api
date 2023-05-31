@@ -40,7 +40,16 @@ class CategoryController {
 
   async delete(request, response) {
     // Apaga um registro
-    response.send('Método DELETE funcionando');
+    const { id } = request.params;
+
+    const category = await CategoriesRepository.findById(id);
+
+    if (!category) {
+      return response.json({ error: 'Categoria não encontrada' });
+    }
+
+    await CategoriesRepository.delete(id);
+    return response.sendStatus(204);
   }
 }
 
